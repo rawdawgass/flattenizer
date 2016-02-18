@@ -25,7 +25,7 @@ def allowed_file(filename):
 # value of the operation
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('flattenizer.html')
 
 
 # Route that will process the file upload
@@ -42,8 +42,7 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         # Redirect the user to the uploaded_file route, which
         # will basicaly show on the browser the uploaded file
-        #return redirect(url_for('uploaded_file',
-        #                        filename=filename))
+        return 'File uploaded'
     else:
         return render_template('nofile.html')
 
