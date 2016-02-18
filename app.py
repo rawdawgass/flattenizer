@@ -29,11 +29,23 @@ def upload():
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        
-
-
+        file.save(join(app.config['UPLOAD_FOLDER'], filename))
         flattenizer(join(app.config['UPLOAD_FOLDER'], filename), join(app.config['UPLOAD_FOLDER']))
-        #file.save(join(app.config['UPLOAD_FOLDER'], filename))
+
+        #for xlsx in app.config['UPLOAD_FOLDER']:
+        #    flat_filename = 'FLAT' + filename
+        #    if xlsx == flat_filename:
+        #return join(app.config['UPLOAD_FOLDER'], 'FLAT_' + filename)
+        #        return redirect(url_for('uploaded_file')
+        #                        filename=filename))
+
+        #
+        # Redirect the user to the uploaded_file route, which
+        # will basicaly show on the browser the uploaded file
+        return redirect(url_for('uploaded_file',
+                                filename='FLAT_' + filename))
+
+
         return "File flattenized!!!"
     else:
         return render_template('nofile.html')
