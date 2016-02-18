@@ -45,7 +45,7 @@ def upload():
         #return redirect(url_for('uploaded_file',
         #                        filename=filename))
     else:
-        print ('FUCK YOU')
+        return render_template('nofile.html')
 
 # This route is expecting a parameter containing the name
 # of a file. Then it will locate that file on the upload
