@@ -21,6 +21,9 @@ def allowed_file(filename):
 def index():
     return render_template('flattenizer.html')
 
+
+
+
 # Route that will process the file upload
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -28,6 +31,7 @@ def upload():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(join(app.config['UPLOAD_FOLDER'], filename))
+
         flattenizer(join(app.config['UPLOAD_FOLDER'], filename), join(app.config['UPLOAD_FOLDER']))
 
         return redirect(url_for('uploaded_file',
@@ -38,15 +42,18 @@ def upload():
     else:
         return render_template('nofile.html')
 
+
+
 # This figure out why this works down there
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
 
+
 if __name__ == '__main__':
     app.run(
         host="0.0.0.0",
-        port=int("9000"),
+        port=int("8888"),
         debug=True
     )
