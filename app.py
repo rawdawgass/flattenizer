@@ -40,7 +40,6 @@ def upload():
 
         return redirect(url_for('uploaded_file',
                                 filename='FLAT_' + filename))
-
     else:
         return render_template('nofile.html')
 
