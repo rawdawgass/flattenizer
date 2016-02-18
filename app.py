@@ -35,7 +35,7 @@ def upload():
         flattenizer(join(app.config['UPLOAD_FOLDER'], filename), join(app.config['UPLOAD_FOLDER']))
 
 
-        return "File flattenized!!!"
+        #return "File flattenized!!!"
 
 
         return redirect(url_for('uploaded_file',
