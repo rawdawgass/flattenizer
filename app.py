@@ -34,11 +34,13 @@ def upload():
 
         flattenizer(join(app.config['UPLOAD_FOLDER'], filename), join(app.config['UPLOAD_FOLDER']))
 
+
+        return "File flattenized!!!"
+
+
         return redirect(url_for('uploaded_file',
                                 filename='FLAT_' + filename))
 
-
-        #return "File flattenized!!!"
     else:
         return render_template('nofile.html')
 
@@ -54,6 +56,8 @@ def uploaded_file(filename):
 if __name__ == '__main__':
     app.run(
         host="0.0.0.0",
-        port=int("8888"),
+        port=int("9000"),
         debug=True
     )
+
+
