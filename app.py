@@ -16,9 +16,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
-# This route will show a form to perform an AJAX request
-# jQuery is loaded to execute the request and update the
-# value of the operation
+
 @app.route('/')
 def index():
     return render_template('flattenizer.html')
@@ -32,28 +30,15 @@ def upload():
         file.save(join(app.config['UPLOAD_FOLDER'], filename))
         flattenizer(join(app.config['UPLOAD_FOLDER'], filename), join(app.config['UPLOAD_FOLDER']))
 
-        #for xlsx in app.config['UPLOAD_FOLDER']:
-        #    flat_filename = 'FLAT' + filename
-        #    if xlsx == flat_filename:
-        #return join(app.config['UPLOAD_FOLDER'], 'FLAT_' + filename)
-        #        return redirect(url_for('uploaded_file')
-        #                        filename=filename))
-
-        #
-        # Redirect the user to the uploaded_file route, which
-        # will basicaly show on the browser the uploaded file
         return redirect(url_for('uploaded_file',
                                 filename='FLAT_' + filename))
 
 
-        return "File flattenized!!!"
+        #return "File flattenized!!!"
     else:
         return render_template('nofile.html')
 
-# This route is expecting a parameter containing the name
-# of a file. Then it will locate that file on the upload
-# directory and show it on the browser, so if the user uploads
-# an image, that image is going to be show after the upload
+# This figure out why this works down there
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
