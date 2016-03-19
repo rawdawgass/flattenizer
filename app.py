@@ -35,13 +35,17 @@ def upload():
         flattenizer(join(app.config['UPLOAD_FOLDER'], filename), join(app.config['UPLOAD_FOLDER']))
 
 
-        #return "File flattenized!!!"
-
+        os.remove(join('uploads',filename))
 
         return redirect(url_for('uploaded_file',
                                 filename='FLAT_' + filename))
+
+
     else:
         return render_template('nofile.html')
+
+
+
 
 
 
@@ -58,5 +62,3 @@ if __name__ == '__main__':
         port=int("9000"),
         debug=True
     )
-
-
